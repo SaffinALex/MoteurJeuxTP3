@@ -10,10 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    transform.cpp
 
 HEADERS += \
-    mainwindow.h
+    BasicIO.h \
+    mainwindow.h \
+    transform.h
 
 FORMS += \
     mainwindow.ui
