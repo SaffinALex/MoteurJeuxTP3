@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwidget.cpp \
     mainwindow.cpp \
+    sphere.cpp \
     transform.cpp
 
 HEADERS += \
@@ -22,6 +23,7 @@ HEADERS += \
     geometryengine.h \
     mainwidget.h \
     mainwindow.h \
+    sphere.h \
     transform.h
 
 FORMS += \

@@ -54,18 +54,20 @@
 #include <QOpenGLFunctions_3_1>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
+#include <gameobject.h>
+#include "sphere.h"
 
 class GeometryEngine : protected QOpenGLFunctions_3_1
 {
+
 public:
-    GeometryEngine();
+    GeometryEngine(Sphere o);
     virtual ~GeometryEngine();
 
     void drawCubeGeometry(QOpenGLShaderProgram *program);
 
 private:
-    void initCubeGeometry();
-
+    void initCubeGeometry(Sphere);
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;
 };

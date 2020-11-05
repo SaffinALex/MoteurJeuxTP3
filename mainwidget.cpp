@@ -52,12 +52,15 @@
 
 #include <QMouseEvent>
 #include <QKeyEvent>
-
+#include "gameobject.h"
+#include "sphere.h"
 #include <math.h>
 
 MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
     geometries(0),
+    geometries2(0),
+    geometries3(0),
     textureG(0),
     textureR(0),
     textureS(0),
@@ -71,6 +74,8 @@ MainWidget::MainWidget(QWidget *parent) :
 MainWidget::MainWidget(int fps, QWidget *parent) :
     QOpenGLWidget(parent),
     geometries(0),
+    geometries2(0),
+    geometries3(0),
     textureG(0),
     textureR(0),
     textureS(0),
@@ -239,8 +244,6 @@ void MainWidget::initializeGL()
     glEnable(GL_CULL_FACE);
 //! [2]
 
-    geometries = new GeometryEngine;
-
     // Use QBasicTimer because its faster than QTimer
     //timer.start(12, this);
 }
@@ -343,6 +346,38 @@ void MainWidget::resizeGL(int w, int h)
 
 void MainWidget::paintGL()
 {
+    float rayonOrbitTerre = 1;
+    float rayonOrbitLune = 0.25;
+    float angleR = 45;
+    float posZTerre = rayonOrbitTerre/tan(angleR);
+    float posZLune = rayonOrbitLune/tan(angleR);
+    angle+=vadd*5;
+    GameObject scene;
+    Sphere soleil;
+    //angular_x+=0.1;
+    soleil.parent = &scene;
+    scene.fils.push_back(&soleil);
+    scene.parent = &scene;
+    soleil.localTransform.t = QVector3D(0,0,1);
+    soleil.localTransform.s = 0.5;
+    soleil.changeTransform();
+    Sphere terre;
+    terre.parent = &soleil;
+    soleil.fils.push_back(&terre);
+    terre.localTransform.t = QVector3D(rayonOrbitTerre*sin(angle),rayonOrbitTerre*cos(angle),posZTerre);
+    terre.localTransform.s = 0.25;
+    terre.changeTransform();
+    Sphere lune;
+    lune.parent = &terre;
+    terre.fils.push_back(&lune);
+    lune.localTransform.t = QVector3D(rayonOrbitLune*sin(angle*2),rayonOrbitLune*cos(angle*2),posZLune);
+    lune.localTransform.s = 0.4;
+    lune.changeTransform();
+
+    geometries = new GeometryEngine(soleil);
+    geometries2 = new GeometryEngine(terre);
+    geometries3 = new GeometryEngine(lune);
+
     // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -386,4 +421,6 @@ void MainWidget::paintGL()
 
     // Draw cube geometry
     geometries->drawCubeGeometry(&program);
+    geometries2->drawCubeGeometry(&program);
+    geometries3->drawCubeGeometry(&program);
 }

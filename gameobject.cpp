@@ -10,26 +10,23 @@ GameObject::GameObject(Transform t)
     this->localTransform = t;
 }
 
-//Appelé sur la scéne
+//udate tree
 void GameObject::update(){
-
-    for(int i = 0; i<fils.size(); i++){
-        fils[i]->update(this->worldTransform);
-    }
-}
-
-//Appelé sur les enfants
-void GameObject::update(Transform transform){
     getWorldTransform();
     for(int i = 0; i<fils.size(); i++){
-        fils[i]->update(worldTransform);
+        fils[i]->update();
     }
 }
+
+
 
 Transform GameObject::getWorldTransform(){
     Transform t = localTransform;
-    if(parent != NULL)
-        t = t + parent->getWorldTransform();
+    if(parent != this){
+        t.t = t.t + parent->getWorldTransform().t;
+        t.s = t.s * parent->getWorldTransform().s;
+    }
     worldTransform = t;
+    qDebug()<<t.s;
     return t;
 }

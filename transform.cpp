@@ -40,7 +40,7 @@ Transform Transform::interpolate_with(Transform t, float k){
 Transform Transform::operator+(Transform transform){
     Transform se;
     se.t=t+ transform.t;
-    se.r= r+ transform.r;
+    se.r= r + transform.r;
     se.s= s + transform.s;
     return se;
 }

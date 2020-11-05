@@ -17,6 +17,7 @@ public:
     ~MainWindow();
     void paintGl();
 
+
 private:
     Ui::MainWindow *ui;
 };

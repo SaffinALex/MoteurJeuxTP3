@@ -94,6 +94,8 @@ private:
     QBasicTimer timer;
     QOpenGLShaderProgram program;
     GeometryEngine *geometries;
+    GeometryEngine *geometries2;
+    GeometryEngine *geometries3;
 
     QOpenGLTexture *textureG;
     QOpenGLTexture *textureR;
