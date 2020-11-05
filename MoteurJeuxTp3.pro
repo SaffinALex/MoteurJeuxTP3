@@ -10,13 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     gameobject.cpp \
+    geometryengine.cpp \
     main.cpp \
+    mainwidget.cpp \
     mainwindow.cpp \
     transform.cpp
 
 HEADERS += \
     BasicIO.h \
     gameobject.h \
+    geometryengine.h \
+    mainwidget.h \
     mainwindow.h \
     transform.h
 
@@ -27,3 +31,10 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=
+
+RESOURCES += \
+    objets.qrc \
+    shaders.qrc \
+    textures.qrc

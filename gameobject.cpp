@@ -7,7 +7,7 @@ GameObject::GameObject()
 
 GameObject::GameObject(Transform t)
 {
-    this->t = t;
+    this->localTransform = t;
 }
 
 //Appelé sur la scéne
