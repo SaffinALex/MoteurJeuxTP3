@@ -5,13 +5,15 @@
 
 class GameObject
 {
-    Transform t;
-    QVector<GameObject> gameObjects;
+    GameObject* parent;
+    Transform localTransform, worldTransform;
+    QVector<GameObject*> fils;
 public:
     GameObject();
     GameObject(Transform t);
     void update();
     void update(Transform);
+    Transform getWorldTransform();
 
 };
 

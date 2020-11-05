@@ -36,3 +36,11 @@ Transform Transform::interpolate_with(Transform t, float k){
     result.t= this->t* k+ t.t * (1-k);
     return result;
 }
+
+Transform Transform::operator+(Transform transform){
+    Transform se;
+    se.t=t+ transform.t;
+    se.r= r+ transform.r;
+    se.s= s + transform.s;
+    return se;
+}

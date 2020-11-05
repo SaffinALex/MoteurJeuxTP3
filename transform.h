@@ -13,6 +13,7 @@ class Transform
         Transform combine_with(Transform t);
         Transform inverse();
         Transform interpolate_with(Transform t, float k);
+        Transform operator+(Transform transform);
 
 };
 

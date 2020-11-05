@@ -13,17 +13,23 @@ GameObject::GameObject(Transform t)
 //Appelé sur la scéne
 void GameObject::update(){
 
-    for(int i = 0; i<gameObjects.size(); i++){
-        gameObjects[i].update(this->t);
+    for(int i = 0; i<fils.size(); i++){
+        fils[i]->update(this->worldTransform);
     }
 }
 
 //Appelé sur les enfants
 void GameObject::update(Transform transform){
-    this->t.r = (t.r + transform.r);
-    this->t.t = (t.t + transform.t);
-    this->t.s = (t.s + transform.s);
-    for(int i = 0; i<gameObjects.size(); i++){
-        gameObjects[i].update(this->t);
+    getWorldTransform();
+    for(int i = 0; i<fils.size(); i++){
+        fils[i]->update(worldTransform);
     }
+}
+
+Transform GameObject::getWorldTransform(){
+    Transform t = localTransform;
+    if(parent != NULL)
+        t = t + parent->getWorldTransform();
+    worldTransform = t;
+    return t;
 }
